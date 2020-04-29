@@ -28,8 +28,9 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.s(a|c)ss$/,
+				exclude: /\.module.(s(a|c)ss)$/,
+				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }]
       },
       {
 				test: /\.(png|jpg|gif)$/,

@@ -1,16 +1,7 @@
 import fetchService from './fetchService';
 
-export const signupService = ({ first_name, last_name, email, password, address, bio, occupation, expertise }) => {
-  const result = fetchService.post('/api/v2/auth/signup', {
-    first_name,
-    last_name,
-    email,
-    password,
-    address,
-    bio,
-    occupation,
-    expertise
-  });
+export const signupService = (data) => {
+  const result = fetchService.post('/api/v2/auth/signup', data);
   return result;
 };
 

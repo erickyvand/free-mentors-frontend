@@ -30,3 +30,7 @@ export const signupShcema = yup.object({
     .required()
     .min(3, "Expertise must be at least 3 characters"),
 });
+
+export const signinSchema = yup.object({
+  email: yup.string().email('Email must be a valid email'),
+});

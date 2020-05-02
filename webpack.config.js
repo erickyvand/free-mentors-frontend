@@ -13,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx?)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
@@ -35,7 +35,22 @@ module.exports = {
       {
 				test: /\.(png|jpg|gif)$/,
 				use: ['file-loader']
-			}
+      },
+      {
+        test: /\.(svg$)/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              limit: 1000
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|woff|woff2|ttf|eot)($|\?)/i,
+        use: {loader: 'url-loader?limit=5000'}
+      }
     ]
   },
   devServer: {
@@ -51,5 +66,8 @@ module.exports = {
 				API_URL: JSON.stringify(process.env.API_URL)
 			}
 		})
-  ]
+  ],
+  resolve: {
+		extensions: ['.js', '.jsx', '.scss']
+	}
 };

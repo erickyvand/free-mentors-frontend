@@ -1,5 +1,5 @@
-import { SIGNUP } from "../../actionType";
-import { signupService } from "../../../services/authService";
+import { SIGNUP, SIGNIN } from "../../actionType";
+import { signupService, loginService } from "../../../services/authService";
 
 export const signupAction = ({
   first_name,
@@ -23,5 +23,12 @@ export const signupAction = ({
       occupation,
       expertise,
     }),
+  };
+};
+
+export const signinAction = ({ email, password }) => {
+  return {
+    type: SIGNIN,
+    payload: loginService({ email, password }),
   };
 };

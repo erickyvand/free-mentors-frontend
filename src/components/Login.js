@@ -10,22 +10,55 @@ import {
   TextField,
   Button,
   Collapse,
+  Snackbar,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Formik } from "formik";
+import { signinSchema } from "../validation/validationSchema";
+import { signinAction } from "../redux/actions/auth/authAction";
+import Loading from "./Loading";
 
 const Login = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const signupReducer = useSelector((state) => state.signup);
+  const signin = useSelector((state) => state.signin);
 
   const [open, setOpen] = useState(true);
+  const [unlock, setUnlock] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const closeError = () => {
+    setUnlock(!unlock);
+  };
+
+  const handleDisable = (props, signin) => {
+    if (!props.values.email || !props.values.password || signin.loading) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleSubmit = (values) => {
+    dispatch(signinAction(values));
+    setUnlock(true);
+  };
+
+  if (signin.redirect) {
+    sessionStorage.setItem('id', signin.data.id);
+    sessionStorage.setItem('firstName', signin.data.firstName);
+    sessionStorage.setItem('lastName', signin.data.lastName);
+    sessionStorage.setItem('userType', signin.data.userType);
+    return <Redirect to='/dashboard' />
+  }
 
   return (
     <div className={classes.root}>
@@ -43,6 +76,13 @@ const Login = () => {
             square
           >
             <div className={classes.paper}>
+              <Snackbar
+                open={unlock && signin.error !== ""}
+                autoHideDuration={3000}
+                onClose={closeError}
+              >
+                <Alert severity="error" onClose={closeError}>{signin.error}</Alert>
+              </Snackbar>
               <Collapse in={open}>
                 {signupReducer.message && (
                   <Alert severity="success" onClose={handleClose}>
@@ -56,48 +96,80 @@ const Login = () => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <form className={classes.form} noValidate>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  size="small"
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  size="small"
-                  id="password"
-                  label="Password"
-                  name="password"
-                  type="password"
-                  autoComplete="password"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Signin
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <span>
-                      Don't have an account?
-                      <Link to="/" className={classes.linkText}>
-                        Signup
-                      </Link>
-                    </span>
-                  </Grid>
-                </Grid>
-              </form>
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                validationSchema={signinSchema}
+                onSubmit={(values) => handleSubmit(values)}
+              >
+                {(props) => (
+                  <form
+                    className={classes.form}
+                    onSubmit={props.handleSubmit}
+                    noValidate
+                  >
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      size="small"
+                      id="email"
+                      label="Email"
+                      name="email"
+                      autoComplete="email"
+                      type="text"
+                      onChange={props.handleChange("email")}
+                      value={props.values.email}
+                      error={
+                        props.values.email !== "" &&
+                        Object.prototype.hasOwnProperty.call(
+                          props.errors,
+                          "email"
+                        )
+                      }
+                      helperText={props.errors.email && props.errors.email}
+                    />
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      size="small"
+                      id="password"
+                      label="Password"
+                      name="password"
+                      type="password"
+                      autoComplete="password"
+                      onChange={props.handleChange("password")}
+                      value={props.values.password}
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      disabled={handleDisable(props, signin)}
+                      className={classes.submit}
+                    >
+                      {signin.loading ? (
+                        <>
+                          Loading <Loading />
+                        </>
+                      ) : (
+                        "Signin"
+                      )}
+                    </Button>
+                    <Grid container>
+                      <Grid item xs>
+                        <span>
+                          Don't have an account?
+                          <Link to="/" className={classes.linkText}>
+                            Signup
+                          </Link>
+                        </span>
+                      </Grid>
+                    </Grid>
+                  </form>
+                )}
+              </Formik>
             </div>
           </Grid>
         </Grid>

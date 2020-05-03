@@ -16,6 +16,7 @@ import { Formik } from "formik";
 import { signupShcema } from "../validation/validationSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../redux/actions/auth/authAction";
+import Loading from "./Loading";
 
 const Signup = () => {
   const classes = useStyles();
@@ -282,7 +283,7 @@ const Signup = () => {
                       disabled={handleDisable(props, signupReducer)}
                       className={classes.submit}
                     >
-                      {signupReducer.loading ? "Loading..." : "Signup"}
+                      {signupReducer.loading ? (<>Loading <Loading /></>) : "Signup"}
                     </Button>
                     <Grid container>
                       <Grid item xs>

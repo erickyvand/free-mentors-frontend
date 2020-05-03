@@ -6,6 +6,9 @@ const useStyles = makeStyles({
   },
   appBar: {
     backgroundColor: '#3d4c63'
+  },
+  title: {
+    cursor: 'pointer'
   }
 });
 

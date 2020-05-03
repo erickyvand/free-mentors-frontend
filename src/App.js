@@ -1,11 +1,12 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import store from './redux/store';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Switch>
             <Route path='/' exact component={Signup} />
             <Route path='/login' component={Login} />
+            <Route path='/dashboard' component={Dashboard} />
           </Switch>
         </Router>
         <Footer />

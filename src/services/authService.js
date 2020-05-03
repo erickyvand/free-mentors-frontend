@@ -5,11 +5,8 @@ export const signupService = (data) => {
   return result;
 };
 
-export const loginService = ({ email, password }) => {
-  const result = fetchService.post('/api/v2/auth/signin', {
-    email,
-    password
-  });
+export const loginService = (data) => {
+  const result = fetchService.post('/api/v2/auth/signin', data);
   return result;
 }
 

@@ -20,6 +20,7 @@ import { Formik } from "formik";
 import { signinSchema } from "../validation/validationSchema";
 import { signinAction } from "../redux/actions/auth/authAction";
 import Loading from "./Loading";
+import Dashboard from "./Dashboard";
 
 const Login = () => {
   const classes = useStyles();
@@ -57,7 +58,8 @@ const Login = () => {
     sessionStorage.setItem('firstName', signin.data.firstName);
     sessionStorage.setItem('lastName', signin.data.lastName);
     sessionStorage.setItem('userType', signin.data.userType);
-    return <Redirect to='/dashboard' />
+    sessionStorage.setItem('token', signin.data.token);
+    window.location.href = '/dashboard';
   }
 
   return (

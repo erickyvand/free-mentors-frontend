@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../styles/headerStyles";
 import {
-  Container,
   Grid,
   CssBaseline,
   Button,
@@ -29,6 +28,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import Mentors from "./Mentors";
 import Dashboard from "./Dashboard";
+import Mentor from "./Mentor";
 
 const Header = () => {
   const classes = useStyles();
@@ -85,10 +85,10 @@ const Header = () => {
           )}
           <Grid container component="main">
             <CssBaseline />
-            <Grid item md={10}>
+            <Grid item md={10} xs={12} sm={12}>
               <Typography variant="h6">Free Mentors&nbsp;</Typography>
             </Grid>
-            <Grid item md={2}>
+            <Grid item md={2} xs={12} sm={12}>
               {sessionStorage.getItem("id") && (
                 <Typography variant="h6" className={classes.title}>
                   {sessionStorage.getItem("firstName")}{" "}
@@ -165,6 +165,7 @@ const Header = () => {
         <Switch>
           <Route path="/mentors" exact component={Mentors} />
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/mentor/:id" exact component={Mentor} />
         </Switch>
       </main>
     </div>

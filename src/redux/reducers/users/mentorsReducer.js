@@ -3,32 +3,32 @@ import { pending, fulfilled, rejected } from "../../../helpers/utils";
 
 const initialState = {
   loading: false,
-  data: "",
+  data: [],
   error: "",
 };
 
-const mentorReducer = (state = initialState, action) => {
+const mentorsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case pending(types.MENTOR):
+    case pending(types.MENTORS):
       return {
         ...state,
         loading: true,
       };
-    case fulfilled(types.MENTOR):
+    case fulfilled(types.MENTORS):
       return {
         ...state,
         loading: false,
-        data: action.payload.data.data.Mentor,
+        data: action.payload.data.data,
       };
-    case rejected(types.MENTOR):
+    case rejected(types.MENTORS):
       return {
         ...state,
         loading: false,
-        error: action.payload.response.data.error,
+        error: action.payload,
       };
     default:
       return state;
   }
 };
 
-export default mentorReducer;
+export default mentorsReducer;

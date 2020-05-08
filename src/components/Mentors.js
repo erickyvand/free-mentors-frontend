@@ -13,6 +13,10 @@ const Mentors = () => {
     return <Redirect to="/login" />;
   }
 
+  if (sessionStorage.getItem("userType") === "2") {
+    return <Redirect to="/dashboard" />;
+  }
+
   const classes = useStyles();
   const dispatch = useDispatch();
 

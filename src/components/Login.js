@@ -80,7 +80,7 @@ const Login = () => {
             <div className={classes.paper}>
               <Snackbar
                 open={unlock && signin.error !== ""}
-                autoHideDuration={3000}
+                autoHideDuration={6000}
                 onClose={closeError}
               >
                 <Alert severity="error" onClose={closeError}>{signin.error}</Alert>

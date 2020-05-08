@@ -34,6 +34,10 @@ const Mentor = (props) => {
     return <Redirect to="/login" />;
   }
 
+  if (sessionStorage.getItem("userType") === "2") {
+    return <Redirect to="/dashboard" />;
+  }
+
   const classes = useStyles();
   const mentorId = props.match.params.id;
 
@@ -68,10 +72,13 @@ const Mentor = (props) => {
 
   const handleSubmit = (values) => {
     dispatch(sessionAction(mentorId, values.questions));
-    // setUnlock(false);
   };
 
   if (sessions.redirect) {
+    sessionStorage.setItem(
+      "message",
+      "Your request has been made successfully"
+    );
     return <Redirect to="/sessions" />;
   }
 

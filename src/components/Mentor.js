@@ -13,10 +13,17 @@ import {
   TableBody,
   Dialog,
   DialogContent,
+  Button,
+  DialogTitle,
+  TextField,
 } from "@material-ui/core";
 import useStyles from "../styles/mentorStyles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Slide from "@material-ui/core/Slide";
+import { Formik } from "formik";
+import { sessionSchema } from "../validation/validationSchema";
+import { sessionAction } from "../redux/actions/sessions/sessionAction";
+import Loading from "./Loading";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="right" ref={ref} {...props} />;
@@ -32,10 +39,12 @@ const Mentor = (props) => {
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [unlock, setUnlock] = useState(false);
 
   const mentorReducer = useSelector((state) => state.mentor);
   const mentor = mentorReducer.data;
-  console.log(mentorReducer);
+
+  const sessions = useSelector((state) => state.sessions);
 
   useEffect(() => {
     dispatch(mentorAction(mentorId));
@@ -49,10 +58,27 @@ const Mentor = (props) => {
     setOpen(false);
   };
 
+  const openFormDialog = () => {
+    setUnlock(true);
+  };
+
+  const closeFormDialog = () => {
+    setUnlock(false);
+  };
+
+  const handleSubmit = (values) => {
+    dispatch(sessionAction(mentorId, values.questions));
+    // setUnlock(false);
+  };
+
+  if (sessions.redirect) {
+    return <Redirect to="/sessions" />;
+  }
+
   return (
     <div>
-      <Grid container direction="row" justify="center" spacing={2}>
-        <Grid item md={5} xs={12}>
+      <Grid container direction="row" justify="center" spacing={10}>
+        <Grid item md={4} xs={12}>
           {mentorReducer.loading ? (
             <Skeleton
               style={{ margin: "auto" }}
@@ -196,6 +222,67 @@ const Mentor = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+        <Grid item md={5} xs={12}>
+          <Button variant="contained" color="primary" onClick={openFormDialog}>
+            Request Session
+          </Button>
+          <Dialog open={unlock} onClose={closeFormDialog}>
+            <DialogTitle className={classes.dialogTitle}>
+              Request Session
+            </DialogTitle>
+            <DialogContent>
+              <Formik
+                initialValues={{ questions: "" }}
+                validationSchema={sessionSchema}
+                onSubmit={(values) => handleSubmit(values)}
+              >
+                {(props) => (
+                  <form onSubmit={props.handleSubmit}>
+                    <TextField
+                      type="text"
+                      id="questions"
+                      name="questions"
+                      fullWidth
+                      label="Questions"
+                      variant="outlined"
+                      value={props.values.questions}
+                      onChange={props.handleChange("questions")}
+                      error={
+                        props.values.questions !== "" ||
+                        props.values.questions === ""
+                          ? Object.prototype.hasOwnProperty.call(
+                              props.errors,
+                              "questions"
+                            )
+                          : ""
+                      }
+                      helperText={
+                        props.errors.questions && props.errors.questions
+                      }
+                    />
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      type="submit"
+                      disabled={!props.values.questions || sessions.loading}
+                    >
+                      {sessions.loading ? (
+                        <>
+                          Loading
+                          <Loading />
+                        </>
+                      ) : (
+                        "Submit"
+                      )}
+                    </Button>
+                  </form>
+                )}
+              </Formik>
+            </DialogContent>
+          </Dialog>
         </Grid>
       </Grid>
     </div>

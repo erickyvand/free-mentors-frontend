@@ -29,6 +29,7 @@ import { Redirect, Switch, Route, Link } from "react-router-dom";
 import Mentors from "./Mentors";
 import Dashboard from "./Dashboard";
 import Mentor from "./Mentor";
+import Sessions from "./Sessions";
 
 const Header = () => {
   const classes = useStyles();
@@ -166,6 +167,7 @@ const Header = () => {
           <Route path="/mentors" exact component={Mentors} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/mentor/:id" exact component={Mentor} />
+          <Route path="/sessions" exact component={Sessions} />
         </Switch>
       </main>
     </div>

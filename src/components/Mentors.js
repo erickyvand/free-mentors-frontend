@@ -40,7 +40,6 @@ const Mentors = () => {
     dispatch(mentorsAction());
   }, []);
 
-  console.log(mentorResults);
   const searchMentor = (e) => {
     setValue(e.target.value);
   };

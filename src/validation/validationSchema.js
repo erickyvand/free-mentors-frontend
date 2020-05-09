@@ -32,5 +32,9 @@ export const signupShcema = yup.object({
 });
 
 export const signinSchema = yup.object({
-  email: yup.string().email('Email must be a valid email'),
+  email: yup.string().email("Email must be a valid email"),
+});
+
+export const sessionSchema = yup.object({
+  questions: yup.string().required("Questions is a required field").min(3, "Questions must be at least 3 characters"),
 });

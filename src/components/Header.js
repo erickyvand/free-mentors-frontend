@@ -25,10 +25,12 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import PeopleIcon from "@material-ui/icons/People";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import NoteIcon from "@material-ui/icons/Note";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import Mentors from "./Mentors";
 import Dashboard from "./Dashboard";
 import Mentor from "./Mentor";
+import Sessions from "./Sessions";
 
 const Header = () => {
   const classes = useStyles();
@@ -141,22 +143,34 @@ const Header = () => {
           </div>
           <Divider />
           <List>
-          <Link to='/dashboard' className={classes.itemText}>
-            <ListItem button>
-              <ListItemIcon>                
-                  <DashboardIcon />               
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          </Link>
-          <Link to='/mentors' className={classes.itemText}>
-            <ListItem button>
-              <ListItemIcon>                
-                  <PeopleIcon />               
-              </ListItemIcon>
-              <ListItemText primary="View Mentors" />
-            </ListItem>
-          </Link>
+            <Link to="/dashboard" className={classes.itemText}>
+              <ListItem button>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+            </Link>
+            {sessionStorage.getItem("userType") !== "2" && (
+              <>
+                <Link to="/mentors" className={classes.itemText}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <PeopleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="View Mentors" />
+                  </ListItem>
+                </Link>
+                <Link to="/sessions" className={classes.itemText}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <NoteIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="View Requests" />
+                  </ListItem>
+                </Link>
+              </>
+            )}
           </List>
         </Drawer>
       )}
@@ -166,6 +180,7 @@ const Header = () => {
           <Route path="/mentors" exact component={Mentors} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/mentor/:id" exact component={Mentor} />
+          <Route path="/sessions" exact component={Sessions} />
         </Switch>
       </main>
     </div>

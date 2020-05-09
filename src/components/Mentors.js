@@ -13,6 +13,10 @@ const Mentors = () => {
     return <Redirect to="/login" />;
   }
 
+  if (sessionStorage.getItem("userType") === "2") {
+    return <Redirect to="/dashboard" />;
+  }
+
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -40,7 +44,6 @@ const Mentors = () => {
     dispatch(mentorsAction());
   }, []);
 
-  console.log(mentorResults);
   const searchMentor = (e) => {
     setValue(e.target.value);
   };

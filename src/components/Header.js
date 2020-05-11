@@ -31,6 +31,7 @@ import Mentors from "./Mentors";
 import Dashboard from "./Dashboard";
 import Mentor from "./Mentor";
 import Sessions from "./Sessions";
+import Requests from "./Requests";
 
 const Header = () => {
   const classes = useStyles();
@@ -66,7 +67,7 @@ const Header = () => {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position='fixed'
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -74,10 +75,10 @@ const Header = () => {
         <Toolbar>
           {sessionStorage.getItem("id") && (
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
+              color='inherit'
+              aria-label='open drawer'
               onClick={handleDrawerOpen}
-              edge="start"
+              edge='start'
               className={clsx(classes.menuButton, {
                 [classes.hide]: open,
               })}
@@ -85,26 +86,26 @@ const Header = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Grid container component="main">
+          <Grid container component='main'>
             <CssBaseline />
             <Grid item md={10} xs={12} sm={12}>
-              <Typography variant="h6">Free Mentors&nbsp;</Typography>
+              <Typography variant='h6'>Free Mentors&nbsp;</Typography>
             </Grid>
             <Grid item md={2} xs={12} sm={12}>
               {sessionStorage.getItem("id") && (
-                <Typography variant="h6" className={classes.title}>
+                <Typography variant='h6' className={classes.title}>
                   {sessionStorage.getItem("firstName")}{" "}
                   {sessionStorage.getItem("lastName")}{" "}
                   <Button
-                    color="inherit"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
+                    color='inherit'
+                    aria-controls='simple-menu'
+                    aria-haspopup='true'
                     onMouseOver={handleClick}
                   >
                     <ArrowDropDownIcon />
                   </Button>
                   <Menu
-                    id="simple-menu"
+                    id='simple-menu'
                     anchorEl={anchorEl}
                     keepMounted
                     open={Boolean(anchorEl)}
@@ -120,7 +121,7 @@ const Header = () => {
       </AppBar>
       {sessionStorage.getItem("id") && (
         <Drawer
-          variant="permanent"
+          variant='permanent'
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
@@ -143,33 +144,43 @@ const Header = () => {
           </div>
           <Divider />
           <List>
-            <Link to="/dashboard" className={classes.itemText}>
+            <Link to='/dashboard' className={classes.itemText}>
               <ListItem button>
                 <ListItemIcon>
                   <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary='Dashboard' />
               </ListItem>
             </Link>
             {sessionStorage.getItem("userType") !== "2" && (
               <>
-                <Link to="/mentors" className={classes.itemText}>
+                <Link to='/mentors' className={classes.itemText}>
                   <ListItem button>
                     <ListItemIcon>
                       <PeopleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="View Mentors" />
+                    <ListItemText primary='View Mentors' />
                   </ListItem>
                 </Link>
-                <Link to="/sessions" className={classes.itemText}>
+                <Link to='/sessions' className={classes.itemText}>
                   <ListItem button>
                     <ListItemIcon>
                       <NoteIcon />
                     </ListItemIcon>
-                    <ListItemText primary="View Requests" />
+                    <ListItemText primary='View Requests' />
                   </ListItem>
                 </Link>
               </>
+            )}
+            {sessionStorage.getItem("userType") === "2" && (
+              <Link to='/requests' className={classes.itemText}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <NoteIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='View Requests' />
+                </ListItem>
+              </Link>
             )}
           </List>
         </Drawer>
@@ -177,10 +188,11 @@ const Header = () => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route path="/mentors" exact component={Mentors} />
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/mentor/:id" exact component={Mentor} />
-          <Route path="/sessions" exact component={Sessions} />
+          <Route path='/mentors' exact component={Mentors} />
+          <Route path='/dashboard' exact component={Dashboard} />
+          <Route path='/mentor/:id' exact component={Mentor} />
+          <Route path='/sessions' exact component={Sessions} />
+          <Route path='/requests' exact component={Requests} />
         </Switch>
       </main>
     </div>

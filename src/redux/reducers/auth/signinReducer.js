@@ -26,7 +26,7 @@ const signinReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: action.payload.response.data.message
+        error: action.payload.response.data.status
       };
     default:
       return state;

@@ -5,6 +5,11 @@ const Dashboard = () => {
   if (!sessionStorage.getItem('id')) {
     return <Redirect to='/login' />
   }
+
+  if (sessionStorage.getItem("userType") !== "1") {
+    return <Redirect to='/home' />
+  }
+
   return (
     <div>
       {sessionStorage.getItem('id')}

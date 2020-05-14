@@ -14,13 +14,12 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import { signinSchema } from "../validation/validationSchema";
 import { signinAction } from "../redux/actions/auth/authAction";
 import Loading from "./Loading";
-import Dashboard from "./Dashboard";
 
 const Login = () => {
   const classes = useStyles();
@@ -30,14 +29,10 @@ const Login = () => {
   const signin = useSelector((state) => state.signin);
 
   const [open, setOpen] = useState(true);
-  const [unlock, setUnlock] = useState(true);
 
   const handleClose = () => {
+    location.href = "/login";
     setOpen(false);
-  };
-
-  const closeError = () => {
-    setUnlock(!unlock);
   };
 
   const handleDisable = (props, signin) => {
@@ -50,16 +45,15 @@ const Login = () => {
 
   const handleSubmit = (values) => {
     dispatch(signinAction(values));
-    setUnlock(true);
   };
 
   if (signin.redirect) {
-    sessionStorage.setItem('id', signin.data.id);
-    sessionStorage.setItem('firstName', signin.data.firstName);
-    sessionStorage.setItem('lastName', signin.data.lastName);
-    sessionStorage.setItem('userType', signin.data.userType);
-    sessionStorage.setItem('token', signin.data.token);
-    window.location.href = '/dashboard';
+    sessionStorage.setItem("id", signin.data.id);
+    sessionStorage.setItem("firstName", signin.data.firstName);
+    sessionStorage.setItem("lastName", signin.data.lastName);
+    sessionStorage.setItem("userType", signin.data.userType);
+    sessionStorage.setItem("token", signin.data.token);
+    window.location.href = "/home";
   }
 
   return (
@@ -78,17 +72,15 @@ const Login = () => {
             square
           >
             <div className={classes.paper}>
-              <Snackbar
-                open={unlock && signin.error !== ""}
-                autoHideDuration={6000}
-                onClose={closeError}
-              >
-                <Alert severity="error" onClose={closeError}>{signin.error}</Alert>
-              </Snackbar>
               <Collapse in={open}>
                 {signupReducer.message && (
                   <Alert severity="success" onClose={handleClose}>
                     {signupReducer.message}
+                  </Alert>
+                )}
+                {signin.error && (
+                  <Alert severity="error" onClose={handleClose}>
+                    Authentication failed, Invalid Email or Password
                   </Alert>
                 )}
               </Collapse>

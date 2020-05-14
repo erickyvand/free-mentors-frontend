@@ -1,28 +1,26 @@
-import * as types from "../../actionType";
 import { pending, fulfilled, rejected } from "../../../helpers/utils";
+import * as types from "../../actionType";
 
 const initialState = {
   loading: false,
-  redirect: false,
   message: "",
   error: "",
 };
 
-const sessionsReducer = (state = initialState, action) => {
+const acceptReducer = (state = initialState, action) => {
   switch (action.type) {
-    case pending(types.REQUEST_SESSIONS):
+    case pending(types.ACCEPT):
       return {
         ...state,
         loading: true,
       };
-    case fulfilled(types.REQUEST_SESSIONS):
+    case fulfilled(types.ACCEPT):
       return {
         ...state,
         loading: false,
-        redirect: true,
         message: action.payload.data.message,
       };
-    case rejected(types.REQUEST_SESSIONS):
+    case rejected(types.ACCEPT):
       return {
         ...state,
         loading: false,
@@ -33,4 +31,4 @@ const sessionsReducer = (state = initialState, action) => {
   }
 };
 
-export default sessionsReducer;
+export default acceptReducer;

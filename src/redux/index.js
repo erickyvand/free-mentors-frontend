@@ -5,6 +5,7 @@ import mentorsReducer from "./reducers/users/mentorsReducer";
 import mentorReducer from "./reducers/users/mentorReducer";
 import sessionsReducer from "./reducers/sessions/sessionsReducer";
 import viewSessionReducer from "./reducers/sessions/viewSessionReducer";
+import menteesReducer from "./reducers/users/menteesReducer";
 
 const rootReducer = combineReducers({
   signup: signupReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   mentors: mentorsReducer,
   mentor: mentorReducer,
   sessions: sessionsReducer,
-  viewSessions: viewSessionReducer
+  viewSessions: viewSessionReducer,
+  mentees: menteesReducer
 });
 
 export default rootReducer;

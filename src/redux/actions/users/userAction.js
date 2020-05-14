@@ -1,5 +1,5 @@
 import * as types from '../../actionType';
-import { mentorsServive, mentorService } from '../../../services/usersService';
+import { mentorsServive, mentorService, menteesService } from '../../../services/usersService';
 
 export const mentorsAction = () => {
   return {
@@ -12,5 +12,12 @@ export const mentorAction = id => {
   return {
     type: types.MENTOR,
     payload: mentorService(id)
+  }
+}
+
+export const menteeAction = () => {
+  return {
+    type: types.MENTEES,
+    payload: menteesService()
   }
 }

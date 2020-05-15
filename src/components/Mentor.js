@@ -50,6 +50,9 @@ const Mentor = (props) => {
 
   const sessions = useSelector((state) => state.sessions);
 
+  const requestedSessionReducer = useSelector((state) => state.sessions);
+  const message = requestedSessionReducer.message;
+
   useEffect(() => {
     dispatch(mentorAction(mentorId));
   }, []);
@@ -75,11 +78,8 @@ const Mentor = (props) => {
   };
 
   if (sessions.redirect) {
-    sessionStorage.setItem(
-      "message",
-      "Your request has been made successfully"
-    );
-    return <Redirect to="/sessions" />;
+    sessionStorage.setItem("message", message);
+    location.href = "/sessions";
   }
 
   return (

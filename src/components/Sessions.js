@@ -52,7 +52,6 @@ const Sessions = () => {
 
   const handleClose = () => {
     setOpen(!open);
-    sessionStorage.setItem("message", "");
   };
 
   useEffect(() => {
@@ -93,7 +92,9 @@ const Sessions = () => {
                 <TableBody>
                   {sessions.length === 0 ? (
                     <TableRow>
-                      <TableCell>No data to display, you have not requested a session</TableCell>
+                      <TableCell>
+                        No data to display, you have not requested a session
+                      </TableCell>
                     </TableRow>
                   ) : (
                     sessions

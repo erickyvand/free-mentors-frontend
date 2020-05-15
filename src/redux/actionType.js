@@ -5,3 +5,5 @@ export const MENTOR = "MENTOR";
 export const REQUEST_SESSIONS = "REQUEST_SESSIONS";
 export const VIEW_SESSIONS = "VIEW_SESSIONS";
 export const MENTEES = "MENTEES";
+export const ACCEPT = "ACCEPT";
+export const REJECT = "REJECT";

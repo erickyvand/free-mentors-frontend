@@ -1,23 +1,35 @@
-import * as types from '../../actionType';
-import { mentorsServive, mentorService, menteesService } from '../../../services/usersService';
+import * as types from "../../actionType";
+import {
+  mentorsServive,
+  mentorService,
+  menteesService,
+  userRoleService,
+} from "../../../services/usersService";
 
 export const mentorsAction = () => {
   return {
     type: types.MENTORS,
-    payload: mentorsServive()
-  }
-}
+    payload: mentorsServive(),
+  };
+};
 
-export const mentorAction = id => {
+export const mentorAction = (id) => {
   return {
     type: types.MENTOR,
-    payload: mentorService(id)
-  }
-}
+    payload: mentorService(id),
+  };
+};
 
 export const menteeAction = () => {
   return {
     type: types.MENTEES,
-    payload: menteesService()
-  }
-}
+    payload: menteesService(),
+  };
+};
+
+export const userRoleAction = (userId) => {
+  return {
+    type: types.USER_ROLE,
+    payload: userRoleService(userId),
+  };
+};

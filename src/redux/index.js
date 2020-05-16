@@ -9,6 +9,7 @@ import menteesReducer from "./reducers/users/menteesReducer";
 import acceptReducer from "./reducers/sessions/acceptReducer";
 import rejectReducer from "./reducers/sessions/rejectReducer";
 import userRoleReducer from "./reducers/users/userRoleReducer";
+import reviewReducer from "./reducers/review/reviewReducer";
 
 const rootReducer = combineReducers({
   signup: signupReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   accept: acceptReducer,
   reject: rejectReducer,
   userRole: userRoleReducer,
+  review: reviewReducer
 });
 
 export default rootReducer;

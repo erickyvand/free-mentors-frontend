@@ -36,7 +36,7 @@ const Requests = () => {
     return <Redirect to="/login" />;
   }
   if (sessionStorage.getItem("userType") !== "2") {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/home" />;
   }
 
   const classes = useStyles();
@@ -67,7 +67,7 @@ const Requests = () => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = () => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };

@@ -23,7 +23,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { Alert } from "@material-ui/lab";
 import Pagination from "./Pagination";
 
-const Dashboard = () => {
+const UpdateRole = () => {
   if (!sessionStorage.getItem("id")) {
     return <Redirect to="/login" />;
   }
@@ -251,4 +251,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UpdateRole;

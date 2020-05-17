@@ -10,6 +10,8 @@ import acceptReducer from "./reducers/sessions/acceptReducer";
 import rejectReducer from "./reducers/sessions/rejectReducer";
 import userRoleReducer from "./reducers/users/userRoleReducer";
 import reviewReducer from "./reducers/review/reviewReducer";
+import viewReviewReducer from "./reducers/review/viewReviewReducer";
+import deleteReviewReducer from "./reducers/review/deleteReviewReducer";
 
 const rootReducer = combineReducers({
   signup: signupReducer,
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
   accept: acceptReducer,
   reject: rejectReducer,
   userRole: userRoleReducer,
-  review: reviewReducer
+  review: reviewReducer,
+  viewReview: viewReviewReducer,
+  deleteReview: deleteReviewReducer,
 });
 
 export default rootReducer;

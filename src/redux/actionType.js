@@ -8,3 +8,4 @@ export const MENTEES = "MENTEES";
 export const ACCEPT = "ACCEPT";
 export const REJECT = "REJECT";
 export const USER_ROLE = "USER_ROLE";
+export const REVIEW = "REVIEW";

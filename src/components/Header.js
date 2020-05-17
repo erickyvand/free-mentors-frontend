@@ -27,6 +27,7 @@ import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import NoteIcon from "@material-ui/icons/Note";
 import HomeIcon from "@material-ui/icons/Home";
+import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import { Switch, Route, Link } from "react-router-dom";
 import Mentors from "./Mentors";
 import UpdateRole from "./UpdateRole";
@@ -34,6 +35,7 @@ import Mentor from "./Mentor";
 import Sessions from "./Sessions";
 import Requests from "./Requests";
 import Home from "./Home";
+import ViewReview from "./ViewReview";
 
 const Header = () => {
   const classes = useStyles();
@@ -159,14 +161,24 @@ const Header = () => {
               </ListItem>
             </Link>
             {sessionStorage.getItem("userType") === "1" && (
-              <Link to="/update-role" className={classes.itemText}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <AccessibilityIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Update Role" />
-                </ListItem>
-              </Link>
+              <>
+                <Link to="/update-role" className={classes.itemText}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <AccessibilityIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Update Role" />
+                  </ListItem>
+                </Link>
+                <Link to="/view-review" className={classes.itemText}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <ViewCarouselIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="View Review" />
+                  </ListItem>
+                </Link>
+              </>
             )}
             {sessionStorage.getItem("userType") !== "2" && (
               <>
@@ -214,6 +226,7 @@ const Header = () => {
           <Route path="/mentor/:id" exact component={Mentor} />
           <Route path="/sessions" exact component={Sessions} />
           <Route path="/requests" exact component={Requests} />
+          <Route path="/view-review" exact component={ViewReview} />
         </Switch>
       </main>
     </div>

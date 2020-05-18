@@ -29,7 +29,7 @@ import {
   acceptAction,
   rejectAction,
 } from "../redux/actions/sessions/sessionAction";
-import { menteeAction } from "../redux/actions/users/userAction";
+import { menteeAction, usersAction } from "../redux/actions/users/userAction";
 
 const Requests = () => {
   if (!sessionStorage.getItem("id")) {
@@ -52,7 +52,7 @@ const Requests = () => {
   const sessionsReducer = useSelector((state) => state.viewSessions);
   const sessions = [...sessionsReducer.data];
 
-  const menteesReducer = useSelector((state) => state.mentees);
+  const menteesReducer = useSelector((state) => state.users);
   const mentees = [...menteesReducer.data];
 
   const acceptedMessage = useSelector((state) => state.accept.message);
@@ -60,7 +60,7 @@ const Requests = () => {
 
   useEffect(() => {
     dispatch(viewSessionAction());
-    dispatch(menteeAction());
+    dispatch(usersAction());
   }, [acceptedMessage, rejectedMessage]);
 
   const handleChangePage = (event, newPage) => {

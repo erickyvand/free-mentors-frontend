@@ -11,3 +11,4 @@ export const USER_ROLE = "USER_ROLE";
 export const REVIEW = "REVIEW";
 export const VIEW_REVIEW = "VIEW_REVIEW";
 export const DELETE_REVIEW = "DELETE_REVIEW";
+export const USERS = "USERS";

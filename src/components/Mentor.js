@@ -231,9 +231,16 @@ const Mentor = (props) => {
           </TableContainer>
         </Grid>
         <Grid item md={5} xs={12}>
-          <Button variant="contained" color="primary" onClick={openFormDialog}>
-            Request Session
-          </Button>
+          {sessionStorage.getItem("userType") === "0" && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={openFormDialog}
+            >
+              Request Session
+            </Button>
+          )}
+
           <Dialog open={unlock} onClose={closeFormDialog}>
             <DialogTitle className={classes.dialogTitle}>
               Request Session

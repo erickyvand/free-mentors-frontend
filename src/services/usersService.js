@@ -19,3 +19,8 @@ export const userRoleService = (userId) => {
   const result = fetch.patch(`/api/v2/user/${userId}`);
   return result;
 };
+
+export const usersService = () => {
+  const result = fetch.get("/api/v2/users");
+  return result;
+};

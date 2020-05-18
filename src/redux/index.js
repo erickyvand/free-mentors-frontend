@@ -12,6 +12,7 @@ import userRoleReducer from "./reducers/users/userRoleReducer";
 import reviewReducer from "./reducers/review/reviewReducer";
 import viewReviewReducer from "./reducers/review/viewReviewReducer";
 import deleteReviewReducer from "./reducers/review/deleteReviewReducer";
+import usersReducer from "./reducers/users/usersReducer";
 
 const rootReducer = combineReducers({
   signup: signupReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   review: reviewReducer,
   viewReview: viewReviewReducer,
   deleteReview: deleteReviewReducer,
+  users: usersReducer,
 });
 
 export default rootReducer;

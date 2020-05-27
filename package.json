@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "heroku-postbuild": "webpack -p",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test jest --coverage -u",
+    "test:coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
+    "coveralls": "^3.1.0",
     "css-loader": "^3.4.2",
     "file-loader": "^5.1.0",
     "html-loader": "^0.5.5",
@@ -46,9 +48,12 @@
     "axios": "^0.19.2",
     "clsx": "^1.1.0",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "formik": "^2.1.4",
     "history": "^4.10.1",
+    "jest": "^26.0.1",
     "material-table": "^1.57.2",
     "node-sass": "^4.14.0",
     "query-string": "^6.11.0",

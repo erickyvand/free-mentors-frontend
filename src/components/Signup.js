@@ -18,29 +18,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../redux/actions/auth/authAction";
 import Loading from "./Loading";
 
+export const handleDisable = (props, signupReducer) => {
+  if (
+    !props.values.first_name ||
+    !props.values.last_name ||
+    !props.values.email ||
+    !props.values.password ||
+    !props.values.address ||
+    !props.values.bio ||
+    !props.values.occupation ||
+    !props.values.expertise ||
+    signupReducer.loading
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const Signup = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const signupReducer = useSelector((state) => state.signup);
-
-  const handleDisable = (props, signupReducer) => {
-    if (
-      !props.values.first_name ||
-      !props.values.last_name ||
-      !props.values.email ||
-      !props.values.password ||
-      !props.values.address ||
-      !props.values.bio ||
-      !props.values.occupation ||
-      !props.values.expertise ||
-      signupReducer.loading
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const handleSubmit = (values) => {
     dispatch(signupAction(values));
@@ -282,8 +282,15 @@ const Signup = () => {
                       color="primary"
                       disabled={handleDisable(props, signupReducer)}
                       className={classes.submit}
+                      data-test="signupButton"
                     >
-                      {signupReducer.loading ? (<>Loading <Loading /></>) : "Signup"}
+                      {signupReducer.loading ? (
+                        <>
+                          Loading <Loading />
+                        </>
+                      ) : (
+                        "Signup"
+                      )}
                     </Button>
                     <Grid container>
                       <Grid item xs>
